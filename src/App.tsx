@@ -102,7 +102,11 @@ function App() {
 
   const handleCondChange = (idx: number, field: 'date' | 'rate' | 'movement') => (e: ChangeEvent<HTMLInputElement>) => {
     setConditions((conds) => {
-      conds[idx][field] = field === 'date' ? dayjs(`${e.target.value}-01`) : parseInt(e.target.value ?? 0)
+      if (field === 'date') {
+        conds[idx][field] = dayjs(`${e.target.value}-01`)
+      } else {
+        conds[idx][field] = parseInt(e.target.value ?? 0)
+      }
       return [...conds]
     })
   }
